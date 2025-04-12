@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    function redirectToAppOrStore() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Android Device
+      if (/android/i.test(userAgent)) {
+        var now = new Date().getTime();
+        // Try to open app with intent
+        var timeout = setTimeout(function () {
+          // If app not installed, go to Play Store
+          window.location.href = "https://play.google.com/store/apps/details?id=com.ridelia.app";
+        }, 1500);
+
+        // Try opening app via intent
+        window.location.href = "intent://#Intent;package=com.ridelia.app;scheme=ridelia;end;";
+      }
+
+      // iOS Device
+      else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = "https://apps.apple.com/us/app/ridelia-pre-schedule-rides/id6741192679";
+      }
+
+      // Other Devices (PC, Mac, etc.)
+      else {
+        window.location.href = "https://www.ridelia.com/";
+      }
+    }
+
+    window.onload = redirectToAppOrStore;
+  </script>
+</head>
+<body>
+  <p>Redirecting... If you're not redirected, <a href="https://www.ridelia.com/">click here</a>.</p>
+</body>
+</html>
