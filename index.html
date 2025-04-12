@@ -34,8 +34,9 @@
       if (/android/i.test(userAgent)) {
         window.location.href = "https://play.google.com/store/apps/details?id=com.ridelia.app";
       }
-      // iOS check
-      else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      // iOS check (including Mac with touch)
+      else if (/iPad|iPhone|iPod/.test(userAgent) || 
+               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
         window.location.href = "https://apps.apple.com/us/app/ridelia-pre-schedule-rides/id6741192679";
       }
       // Others
