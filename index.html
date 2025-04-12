@@ -3,38 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      text-align: center;
+    }
+    .message {
+      font-size: 24px;
+      color: #333;
+    }
+    .link {
+      display: block;
+      margin-top: 15px;
+      font-size: 18px;
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
   <script>
-    function redirectToAppOrStore() {
+    window.onload = function () {
       var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-      // Android Device
+      // Android check
       if (/android/i.test(userAgent)) {
-        var now = new Date().getTime();
-        // Try to open app with intent
-        var timeout = setTimeout(function () {
-          // If app not installed, go to Play Store
-          window.location.href = "https://play.google.com/store/apps/details?id=com.ridelia.app";
-        }, 1500);
-
-        // Try opening app via intent
-        window.location.href = "intent://#Intent;package=com.ridelia.app;scheme=ridelia;end;";
+        window.location.href = "https://play.google.com/store/apps/details?id=com.ridelia.app";
       }
-
-      // iOS Device
+      // iOS check
       else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         window.location.href = "https://apps.apple.com/us/app/ridelia-pre-schedule-rides/id6741192679";
       }
-
-      // Other Devices (PC, Mac, etc.)
+      // Others
       else {
         window.location.href = "https://www.ridelia.com/";
       }
-    }
-
-    window.onload = redirectToAppOrStore;
+    };
   </script>
 </head>
 <body>
-  <p>Redirecting... If you're not redirected, <a href="https://www.ridelia.com/">click here</a>.</p>
+  <div>
+    <div class="message">Redirecting...</div>
+    <a class="link" href="https://www.ridelia.com/">If you're not redirected, click here</a>
+  </div>
 </body>
 </html>
